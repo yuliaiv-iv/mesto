@@ -1,0 +1,4 @@
+.opacity_dark:hover {
+    opacity: 0.8;
+    transition: opacity .5s linear;
+}

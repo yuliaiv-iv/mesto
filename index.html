@@ -10,5 +10,81 @@
     <header class=header>
         <img class="header__logo" src="./images/logo.svg" alt="Логотип">
     </header>
+    <div class="container">    
+        <main class="content">
+            <section class="profile">
+                <img class="profile__avatar" src="./images/Avatar.png" alt="Фотография профиля">
+                <div class="profile__info">
+                    <div class="profile__user-info">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button type="button" class="button profile__button-edit opacity"></button>
+                    </div>
+                    <p class="profile__about">Исследователь океана</p>
+                </div>
+                <button type="button" class="button profile__button-add opacity"></button>
+            </section>
+            <section class="elements">
+                <ul class="element__list">
+                    <li class="element">
+                        <img class="element__image" src="./images/karachaevsk.jpg" alt="Заброшенное здание на фоне гор">
+                        <div class="element__info">
+                            <h3 class="element__title">Карачаево-Черкесская Республика</h3>
+                            <button type="button" class="button element__button"></button>    
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус во время заката">
+                        <div class="element__info">
+                            <h3 class="element__title">Гора Эльбрус</h3>
+                            <button type="button" class="button element__button"></button>    
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/dombay.jpg" alt="Горы в снегу">
+                        <div class="element__info">
+                            <h3 class="element__title">Домбай</h3>
+                            <button type="button" class="button element__button"></button>    
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/baikal.jpg" alt="Зимний Байкал покрытый льдом">
+                        <div class="element__info">
+                            <h3 class="element__title">Байкал</h3>
+                            <button type="button" class="button element__button"></button>
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/kamchatka.jpg" alt="Голубое озеро в горах">
+                        <div class="element__info">
+                            <h3 class="element__title">Камчатка</h3>
+                            <button type="button" class="button element__button"></button>    
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/buryatiya.jpg" alt="Заснеженные горы Бурятии">
+                        <div class="element__info">
+                            <h3 class="element__title">Бурятия</h3>
+                            <button type="button" class="button element__button"></button>    
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <section class="popup">
+            <div class="popup__container">
+                <button type="button" class="button popup__close-icon opacity"></button>
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <form class="popup__input-container">
+                    <input type="text" class="popup__item popup__input-name" name="heading" value="Жак-Ив Кусто" placeholder="Имя" required>
+                    <input type="text" class="popup__item popup__input-about" name="subheading" value="Исследователь океана" placeholder="О себе" required>
+                    <button type="submit" class="button popup__button-submit opacity_dark">Сохранить</button>
+                </form>
+            </div>
+        </section>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
+    </div>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

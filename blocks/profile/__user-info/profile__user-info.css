@@ -1,0 +1,10 @@
+.profile__user-info {
+    display: flex;
+    height: 43px;
+}
+
+@media screen and (max-width: 475px) {
+    .profile__user-info  {
+        height: 38px;
+    }
+}

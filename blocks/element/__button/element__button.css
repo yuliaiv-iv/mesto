@@ -1,0 +1,8 @@
+.element__button {
+    background-image: url(../../../images/like_icon.svg);
+    margin-left: 21px;
+    border: none;
+    min-width: 21px;
+    min-height: 19px;
+    align-self: center;
+}
