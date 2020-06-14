@@ -9,3 +9,14 @@
     background: #fff;
     border-radius: 10px; 
 }
+
+@media screen and (max-width: 550px) {
+    .popup__container {
+        max-width: 350px;
+    }
+}
+@media screen and (max-width: 475px) {
+    .popup__container  {
+    
+    }
+}

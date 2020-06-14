@@ -13,7 +13,6 @@ function popupClose () {
 
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
-submitButton.addEventListener('click', popupClose);
 
 let formElement = document.querySelector('.popup__container');
 let nameInput = formElement.querySelector('.popup__input-name');
