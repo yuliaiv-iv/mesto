@@ -14,3 +14,9 @@
 .popup__item:last-of-type {
     margin-bottom: 0;
 }
+
+@media screen and (max-width: 475px) {
+    .popup__item {
+        margin-bottom: 15px;
+    }
+}

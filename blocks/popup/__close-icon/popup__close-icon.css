@@ -7,3 +7,10 @@
     min-width: 41px;
     min-height: 41px;
 }
+
+@media screen and (max-width: 475px) {
+    .popup__close-icon {
+        min-width: 21px;
+        min-height: 21px;
+    }
+}

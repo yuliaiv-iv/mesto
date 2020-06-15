@@ -2,7 +2,6 @@
     width: 100%;
     min-height: 50px;
     margin-top: 48px;
-    margin-bottom: 36px;
     font-weight: normal;
     font-size: 18px;
     line-height: 1.2;
@@ -10,4 +9,19 @@
     color: white;
     background-color: #000;
     border-radius: 2px;
+}
+.popup__button-submit:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 475px) {
+    .popup__button-submit {
+        margin-top: 24px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .popup__button-submit {
+        margin-top: 15px;
+    }
 }

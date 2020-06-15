@@ -1,4 +1,3 @@
-@import url(./_dark/opacity_dark.css);
 .opacity:hover {
     opacity: 0.6;
     transition: opacity .5s linear;
