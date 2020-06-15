@@ -11,8 +11,3 @@
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     }
-    * {
-        outline-width: 1px;
-        outline-style: solid;
-        outline-color: green;
-    }
