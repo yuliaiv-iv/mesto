@@ -1,7 +1,5 @@
 .profile__button-edit {
     background-image: url(../../../images/edit__button.svg);
-    align-self: flex-end;
-    margin-left: 17px;
     min-width: 24px;
     min-height: 24px;
     border: 1px solid #fff;

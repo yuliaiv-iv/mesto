@@ -9,6 +9,7 @@ let jobInput = formElement.querySelector('.popup__item_input-about');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 
+
 //Выводим данные пользователя в форму при открытии модального окна 
 function popupOpen() {
     popup.classList.add('popup_open');
@@ -26,6 +27,7 @@ function formSubmitHandler (evt) {
     profileAbout.textContent = jobInput.value;
     popupClose ();
 }
+
 //Прикрепляем обработчик при нажатии на кнопки
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
