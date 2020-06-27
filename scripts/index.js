@@ -8,18 +8,20 @@ let nameInput = formElement.querySelector('.popup__item_input-name');
 let jobInput = formElement.querySelector('.popup__item_input-about');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
+//let likeButton = document.querySelector('.elements__button');
 
-
-//Выводим данные пользователя в форму при открытии модального окна 
+//Выводим данные пользователя в форму при открытии модального окна редактировать профиль
 function popupOpen() {
     popup.classList.add('popup_open');
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
 }
+
 //Закрытие модального окна 
 function popupClose () {
     popup.classList.remove('popup_open');
 }
+
 //Обработчик отправки формы
 function formSubmitHandler (evt) {
     evt.preventDefault();  
@@ -31,5 +33,10 @@ function formSubmitHandler (evt) {
 //Прикрепляем обработчик при нажатии на кнопки
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
+
 //Прикрепляем обработчик к форме
 formElement.addEventListener('submit', formSubmitHandler);
+
+//likeButton.addEventListener('click', function (evt) {
+//   evt.target.classList.toggle('elements__button_active');
+//});
