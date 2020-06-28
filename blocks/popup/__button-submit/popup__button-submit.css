@@ -14,14 +14,10 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 375px) {
     .popup__button-submit {
-        margin-top: 24px;
-    }
-}
-
-@media screen and (max-width: 350px) {
-    .popup__button-submit {
-        margin-top: 15px;
+        margin-top: 36px;
+        min-height: 40px;
+        font-size: 14px;
     }
 }

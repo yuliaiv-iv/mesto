@@ -1,5 +1,5 @@
 @import url(./__button-submit/popup__button-submit.css);
-@import url(./__close-icon/popup__close-icon.css);
+@import url(./__close/popup__close.css);
 @import url(./__container/popup__container.css);
 @import url(./__input/popup__input.css);
 @import url(./__item/popup__item.css);
@@ -10,7 +10,6 @@
 @import url(./_image/popup__title_image.css);
 
 .popup {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;

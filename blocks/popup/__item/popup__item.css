@@ -8,15 +8,17 @@
     margin-bottom: 30px;
     font-weight: normal;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 1.2;
 }
 
 .popup__item:last-of-type {
     margin-bottom: 0;
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 375px) {
     .popup__item {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        line-height: 1.25;
     }
 }
