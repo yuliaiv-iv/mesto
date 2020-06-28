@@ -23,61 +23,51 @@
             </section>
             <section class="elements">
                 <ul class="elements__list">
-                    <li class="elements__item">
-                        <img class="elements__image" src="./images/karachaevsk.jpg" alt="Заброшенное здание на фоне гор">
-                        <div class="elements__info">
-                            <h3 class="elements__title">Карачаево-Черкесская Республика</h3>
-                            <button type="button" aria-label="выразить положительную реакцию" class="button elements__button opacity"></button>    
-                        </div>
-                    </li>
-                    <li class="elements__item">
-                        <img class="elements__image" src="./images/elbrus.jpg" alt="Гора Эльбрус во время заката">
-                        <div class="elements__info">
-                            <h3 class="elements__title">Гора Эльбрус</h3>
-                            <button type="button" aria-label="выразить положительную реакцию" class="button elements__button opacity"></button>    
-                        </div>
-                    </li>
-                    <li class="elements__item">
-                        <img class="elements__image" src="./images/dombay.jpg" alt="Горы в снегу">
-                        <div class="elements__info">
-                            <h3 class="elements__title">Домбай</h3>
-                            <button type="button" aria-label="выразить положительную реакцию" class="button elements__button opacity"></button>    
-                        </div>
-                    </li>
-                    <li class="elements__item">
-                        <img class="elements__image" src="./images/baikal.jpg" alt="Зимний Байкал покрытый льдом">
-                        <div class="elements__info">
-                            <h3 class="elements__title">Байкал</h3>
-                            <button type="button" aria-label="выразить положительную реакцию" class="button elements__button opacity"></button>
-                        </div>
-                    </li>
-                    <li class="elements__item">
-                        <img class="elements__image" src="./images/kamchatka.jpg" alt="Голубое озеро в горах">
-                        <div class="elements__info">
-                            <h3 class="elements__title">Камчатка</h3>
-                            <button type="button" aria-label="выразить положительную реакцию" class="button elements__button opacity"></button>    
-                        </div>
-                    </li>
-                    <li class="elements__item">
-                        <img class="elements__image" src="./images/buryatiya.jpg" alt="Заснеженные горы Бурятии">
-                        <div class="elements__info">
-                            <h3 class="elements__title">Бурятия</h3>
-                            <button type="button" aria-label="выразить положительную реакцию" class="button elements__button opacity"></button>    
-                        </div>
-                    </li>
+                    
                 </ul>
             </section>
+            <template class="elements-template">    
+                <li class="elements__item">
+                    <img class="elements__image" src="">
+                    <button type="button" aria-label="удалить элемент" class="button button__delete opacity"></button>
+                    <div class="elements__info">
+                        <h3 class="elements__title"></h3>
+                        <button type="button" aria-label="выразить положительную реакцию" class="button button__like opacity"></button> 
+                    </div>
+                </li>
+            </template>
         </main>
-        <section class="popup">
+
+        <section class="popup popup__edit">
             <div class="popup__container">
-                <button type="button" aria-label="закрыть модальное окно" class="button popup__close-icon opacity"></button>
+                <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_edit opacity"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
-                <form class="popup__input-container" name="edit-form" action="#" method="POST">
+                <form class="popup__input popup__input_container-edit" name="edit-form" action="#" method="POST">
                     <input type="text" class="popup__item popup__item_input-name" name="heading" value="" placeholder="Имя" required>
                     <input type="text" class="popup__item popup__item_input-about" name="subheading" value="" placeholder="О себе" required>
                     <button type="submit" class="button popup__button-submit">Сохранить</button>
                 </form>
+            </div>
         </section>
+        <section class="popup popup__add">
+            <div class="popup__container">
+                <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_add opacity"></button>
+                <h3 class="popup__title">Новое место</h3>
+                <form class="popup__input popup__input_container-add" name="edit-form" action="#" method="POST">
+                    <input type="text" class="popup__item popup__item_input-title" name="heading" value="" placeholder="Название" required>
+                    <input type="text" class="popup__item popup__item_input-link" name="subheading" value="" placeholder="Ссылка на картинку" required>
+                    <button type="submit" class="button popup__button-submit">Создать</button>
+                </form>
+            </div>
+        </section>
+        <section class="popup popup__image popup__background_image">
+            <figure class="popup__container popup__container_image">
+                <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_image opacity"></button>
+                <img class="popup__view">
+                <figcaption class="popup__title popup__title_image"></figcaption>
+            </figure>
+        </section>
+
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>

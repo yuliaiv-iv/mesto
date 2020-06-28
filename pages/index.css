@@ -10,3 +10,10 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_open/popup_open.css);
 @import url(../blocks/opacity/opacity.css);
+@import url(../blocks/popup/_image/popup__background_image.css);
+
+* {
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: green;
+}

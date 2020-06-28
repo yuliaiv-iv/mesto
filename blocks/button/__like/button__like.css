@@ -1,4 +1,4 @@
-.elements__button {
+.button__like {
     background-image: url(../../../images/like_icon.svg);
     margin-left: 21px;
     border: none;
@@ -6,6 +6,6 @@
     min-height: 19px;
     align-self: center;
 }
-.elements__button_active {
+.button__like_active {
     background-image: url(../../../images/like_icon_filled.svg);
 }

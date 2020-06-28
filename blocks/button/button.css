@@ -1,3 +1,5 @@
+@import url(./__delete/button__delete.css);
+@import url(./__like/button__like.css);
 .button {
     padding: 0;
     background-color: Transparent;
