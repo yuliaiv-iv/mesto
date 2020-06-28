@@ -19,6 +19,8 @@ const imageItem = document.querySelector('.popup__view');
 const imageTitle = document.querySelector('.popup__title_image');
 const imagePopup = document.querySelector('.popup__image');
 const closeImageView = document.querySelector('.popup__close_image');
+const titleInput = document.querySelector('.popup__item_input-title');
+const linkInput = document.querySelector('.popup__item_input-link');
 
 const initialCards = [
     {
@@ -123,14 +125,9 @@ initialCards.forEach(function(item) {
 
 //Добавляем новые карточки из массива
 function addFormSubmitHandler (evt) {
-    evt.preventDefault();  
-    let titleInput = document.querySelector('.popup__item_input-title');
-    let linkInput = document.querySelector('.popup__item_input-link');
+    evt.preventDefault();
     const name = titleInput.value;
     const link = linkInput.value;
-    titleInput = '';
-    linkInput = '';
-
     addCard(name, link);
     togglePopup(addPopup);
 }
