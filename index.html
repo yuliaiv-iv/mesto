@@ -21,22 +21,26 @@
                 </div>
                 <button type="button" aria-label="добавить новую карточку" class="button profile__button-add opacity"></button>
             </section>
-            <section class="elements">
-                <ul class="elements__list">
+            <section class="card-container">
+                <ul class="card-container__list">
                     
                 </ul>
             </section>
-            <template class="elements-template">    
-                <li class="elements__item">
-                    <img class="elements__image" src="#" alt="Изображение">
-                    <button type="button" aria-label="удалить элемент" class="button button__delete opacity"></button>
-                    <div class="elements__info">
-                        <h3 class="elements__title"></h3>
-                        <button type="button" aria-label="выразить положительную реакцию" class="button button__like opacity"></button> 
-                    </div>
-                </li>
-            </template>
         </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
+
+        <template class="card-template">    
+            <li class="card">
+                <img class="card__image" src="#" alt="Изображение">
+                <button type="button" aria-label="удалить элемент" class="button button__delete opacity"></button>
+                <div class="card__info">
+                    <h3 class="card__title"></h3>
+                    <button type="button" aria-label="выразить положительную реакцию" class="button button__like opacity"></button> 
+                </div>
+            </li>
+        </template>
 
         <section class="popup popup__edit">
             <div class="popup__container">
@@ -49,6 +53,7 @@
                 </form>
             </div>
         </section>
+
         <section class="popup popup__add">
             <div class="popup__container">
                 <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_add opacity"></button>
@@ -60,6 +65,7 @@
                 </form>
             </div>
         </section>
+
         <section class="popup popup__image popup__background_image">
             <figure class="popup__container popup__container_image">
                 <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_image opacity"></button>
@@ -67,10 +73,6 @@
                 <figcaption class="popup__title popup__title_image"></figcaption>
             </figure>
         </section>
-
-        <footer class="footer">
-            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-        </footer>
     </div>
     <script src="./scripts/index.js"></script>
 </body>

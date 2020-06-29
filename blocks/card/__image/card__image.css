@@ -1,4 +1,4 @@
-.elements__image {
+.card__image {
     max-width: 100%;
     width: 100%;
     border-radius: 10px 10px 0 0;
@@ -8,13 +8,13 @@
 }
 
 @media screen and (max-width: 677px) {
-    .elements__image {
+    .card__image {
         height: 400px;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .elements__image {
+    .card__image {
         height: 282px;
     }
 }

@@ -1,4 +1,6 @@
 .popup__view {
-    width: 100%;
+    max-width: 75vw;
+    width: auto;
     max-height: 75vh;
+    height: auto;
 }
