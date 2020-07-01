@@ -1,5 +1,4 @@
 // Объявление переменных
-const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__button-edit');
 const editPopup = document.querySelector('.popup__edit');
 const closeButtonEdit = document.querySelector('.popup__close_edit');
@@ -52,21 +51,6 @@ const initialCards = [
 function togglePopup (popup) {
     popup.classList.toggle('popup_open');
 }
-//Открываем модальное окно редактирования
-editButton.addEventListener('click', function () {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileAbout.textContent;
-    togglePopup(editPopup);
-});
-
-//Закрываем модальное окно редактирования 
-closeButtonEdit.addEventListener('click', () => togglePopup(editPopup));
-
-//Открываем модальное окно добавления карточки
-addButton.addEventListener('click', () => togglePopup(addPopup));
-
-//Закрываем модальное окно добавления карточки
-closeButtonAdd.addEventListener('click', () => togglePopup(addPopup));
 
 //Открываем попап просмотра фотографии
 function openImage(event) {
@@ -76,14 +60,12 @@ function openImage(event) {
     togglePopup(imagePopup);
 }
 
-//Закрываем попап просмотра фотографии
-closeImageView.addEventListener('click', () => togglePopup(imagePopup));
-
 //Удаление карточек
 function deleteCard(event) {
     const element = event.target.closest('.card');
     element.remove();
 }
+
 //Like карточки
 function likeCard(event) {
     event.target.classList.toggle('button__like_active');
@@ -120,21 +102,36 @@ function addFormSubmitHandler (evt) {
     evt.preventDefault();
     const name = titleInput.value;
     const link = linkInput.value;
-    let card = assembleCard(name, link);
+    const card = assembleCard(name, link);
     addCard(card);
     togglePopup(addPopup);
 }
 
+//Добавляем объекты из массива
+function initialRender() {
+    initialCards.forEach(item => {
+        const card = assembleCard(item.name, item.link);
+        addCard(card);
+    });
+}
+
+//Открываем модальное окно редактирования
+editButton.addEventListener('click', function () {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileAbout.textContent;
+    togglePopup(editPopup);
+});
+//Закрываем модальное окно редактирования 
+closeButtonEdit.addEventListener('click', () => togglePopup(editPopup));
+//Открываем модальное окно добавления карточки
+addButton.addEventListener('click', () => {togglePopup(addPopup), formAdd.reset()});
+//Закрываем модальное окно добавления карточки
+closeButtonAdd.addEventListener('click', () => togglePopup(addPopup));
+//Закрываем попап просмотра фотографии
+closeImageView.addEventListener('click', () => togglePopup(imagePopup));
 //Прикрепляем обработчик к форме добавления карточек
 formAdd.addEventListener('submit', addFormSubmitHandler);
 //Прикрепляем обработчик к форме редактирования
 formEdit.addEventListener('submit', editFormSubmitHandler);
 
-//Добавляем объекты из массива
-function initialRender() {
-    initialCards.forEach(item => {
-        let card = assembleCard(item.name, item.link);
-        addCard(card);
-    });
-}
 initialRender();
