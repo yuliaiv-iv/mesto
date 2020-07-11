@@ -20,6 +20,7 @@ const closeImageView = document.querySelector('.popup__close_image');
 const titleInput = document.querySelector('.popup__item_input-title');
 const linkInput = document.querySelector('.popup__item_input-link');
 
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -48,8 +49,8 @@ const initialCards = [
 ];
 
 //функция принимает элемент попапа в качестве аргумента
-function togglePopup (popup) {
-    popup.classList.toggle('popup_open');
+function togglePopup(event) { 
+    event.classList.toggle('popup_open'); 
 }
 
 //Открываем попап просмотра фотографии
@@ -71,7 +72,7 @@ function likeCard(event) {
     event.target.classList.toggle('button__like_active');
 }
 
-//Отправка формы редактирования
+
 function editFormSubmitHandler (evt) {
     evt.preventDefault();  
     profileName.textContent = nameInput.value;
@@ -114,9 +115,33 @@ function initialRender() {
         addCard(card);
     });
 }
+//Функция закрытия модалных окон до нажатию Esc
+const closePopupEsc = function(event) {
+    document.addEventListener('keydown', (evt) => {
+    if (evt.keyCode === 27) {
+        event.classList.remove('popup_open')
+    }
+});
+}
+closePopupEsc(editPopup);
+closePopupEsc(addPopup);
+closePopupEsc(imagePopup);
+
+//Функция закрытия модальных окон кликом на оверлей
+function closeClickingOverlay(evt) {
+    if (evt.target !== evt.currentTarget) { 
+        return 
+    }
+    const element = evt.target.closest('.popup');
+    element.classList.remove('popup_open');
+}
+
+editPopup.addEventListener('mousedown', closeClickingOverlay);
+addPopup.addEventListener('mousedown', closeClickingOverlay);
+imagePopup.addEventListener('mousedown', closeClickingOverlay);
 
 //Открываем модальное окно редактирования
-editButton.addEventListener('click', function () {
+editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
     togglePopup(editPopup);
@@ -124,7 +149,10 @@ editButton.addEventListener('click', function () {
 //Закрываем модальное окно редактирования 
 closeButtonEdit.addEventListener('click', () => togglePopup(editPopup));
 //Открываем модальное окно добавления карточки
-addButton.addEventListener('click', () => {togglePopup(addPopup), formAdd.reset()});
+addButton.addEventListener('click', () => {
+    togglePopup(addPopup); 
+    formAdd.reset();
+});
 //Закрываем модальное окно добавления карточки
 closeButtonAdd.addEventListener('click', () => togglePopup(addPopup));
 //Закрываем попап просмотра фотографии
@@ -134,4 +162,5 @@ formAdd.addEventListener('submit', addFormSubmitHandler);
 //Прикрепляем обработчик к форме редактирования
 formEdit.addEventListener('submit', editFormSubmitHandler);
 
+//Вызов функции
 initialRender();
