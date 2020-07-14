@@ -48,17 +48,25 @@ const initialCards = [
     }
 ];
 
-//функция принимает элемент попапа в качестве аргумента
-function togglePopup(event) { 
-    event.classList.toggle('popup_open'); 
+config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__item',
+    submitButtonSelector: '.popup__button-submit',
+    inactiveButtonClass: 'popup__button-submit_disabled',
+    inputErrorClass: 'popup__item_error',
+    errorClass: 'popup__item-error_active',
 }
 
-//Открываем попап просмотра фотографии
-function openImage(event) {
-    const element = event.target.closest('.card');
-    imageItem.src = element.querySelector('.card__image').src;
-    imageTitle.textContent = element.querySelector('.card__title').textContent;
-    togglePopup(imagePopup);
+//функция принимает элемент попапа в качестве аргумента
+//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
+function togglePopup(event) { 
+    event.classList.toggle('popup_open');
+    if (event.classList.contains('popup_open')) {
+        document.addEventListener('keydown', closePopupEsc);
+    }
+    else {
+        document.removeEventListener('keydown', closePopupEsc);
+    }
 }
 
 //Удаление карточек
@@ -72,9 +80,8 @@ function likeCard(event) {
     event.target.classList.toggle('button__like_active');
 }
 
-
-function editFormSubmitHandler (evt) {
-    evt.preventDefault();  
+function editFormSubmitHandler (event) {
+    event.preventDefault();  
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
     togglePopup(editPopup);
@@ -99,8 +106,8 @@ function addCard(card) {
 }
 
 //Добавляем новые карточки из массива
-function addFormSubmitHandler (evt) {
-    evt.preventDefault();
+function addFormSubmitHandler (event) {
+    event.preventDefault();
     const name = titleInput.value;
     const link = linkInput.value;
     const card = assembleCard(name, link);
@@ -115,52 +122,78 @@ function initialRender() {
         addCard(card);
     });
 }
+
 //Функция закрытия модалных окон до нажатию Esc
-const closePopupEsc = function(event) {
-    document.addEventListener('keydown', (evt) => {
-    if (evt.keyCode === 27) {
-        event.classList.remove('popup_open')
+function closePopupEsc(evt) {
+    const popupOpen = document.querySelector('.popup_open');
+    if (popupOpen && evt.key === 'Escape') {
+        togglePopup(popupOpen);
     }
-});
 }
-closePopupEsc(editPopup);
-closePopupEsc(addPopup);
-closePopupEsc(imagePopup);
 
 //Функция закрытия модальных окон кликом на оверлей
 function closeClickingOverlay(evt) {
     if (evt.target !== evt.currentTarget) { 
         return 
     }
-    const element = evt.target.closest('.popup');
-    element.classList.remove('popup_open');
+    togglePopup(evt.target)
 }
 
-editPopup.addEventListener('mousedown', closeClickingOverlay);
-addPopup.addEventListener('mousedown', closeClickingOverlay);
-imagePopup.addEventListener('mousedown', closeClickingOverlay);
+//Функция отчистки форм от ошибок при открытии и отключения активности кнопке
+const clearFormError = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
+    formList.forEach((formElement) => {
+        const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+        inputList.forEach((inputElement)=>{
+            const buttonElement = formElement.querySelector(config.submitButtonSelector);
+            buttonElement.setAttribute('disabled', true);
+            buttonElement.classList.add(config.inactiveButtonClass);
+            hideError(formElement, inputElement, config);
+        });
+    });
+}
 
 //Открываем модальное окно редактирования
 editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
     togglePopup(editPopup);
+    clearFormError(config);
 });
-//Закрываем модальное окно редактирования 
-closeButtonEdit.addEventListener('click', () => togglePopup(editPopup));
+
 //Открываем модальное окно добавления карточки
 addButton.addEventListener('click', () => {
     togglePopup(addPopup); 
+    clearFormError(config);
     formAdd.reset();
 });
+
+//Открываем попап просмотра фотографии
+function openImage(event) {
+    const element = event.target.closest('.card');
+    imageItem.src = element.querySelector('.card__image').src;
+    imageTitle.textContent = element.querySelector('.card__title').textContent;
+    togglePopup(imagePopup);
+}
+
 //Закрываем модальное окно добавления карточки
-closeButtonAdd.addEventListener('click', () => togglePopup(addPopup));
+closeButtonAdd.addEventListener('click', () => togglePopup(addPopup)); 
+
+//Закрываем модальное окно редактирования 
+closeButtonEdit.addEventListener('click', () => togglePopup(editPopup));
+
 //Закрываем попап просмотра фотографии
 closeImageView.addEventListener('click', () => togglePopup(imagePopup));
-//Прикрепляем обработчик к форме добавления карточек
+
+//Закрываем попапы нажатием на оверлей
+editPopup.addEventListener('mousedown', closeClickingOverlay);
+addPopup.addEventListener('mousedown', closeClickingOverlay);
+imagePopup.addEventListener('mousedown', closeClickingOverlay);
+
+//Прикрепляем обработчик к форме добавления карточек и форме редактирования
 formAdd.addEventListener('submit', addFormSubmitHandler);
-//Прикрепляем обработчик к форме редактирования
 formEdit.addEventListener('submit', editFormSubmitHandler);
 
-//Вызов функции
+//Вызов функций
 initialRender();
+enableValidation(config);
