@@ -24,6 +24,13 @@ const checkInputValidity = (formElement, inputElement, config) => {
     }
 };
 
+//Проверка наличия невалидного поля
+function hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
+    });
+}
+
 //Функция переключения кнопки
 function toggleButtonState(inputList, buttonElement, config) {
     if (hasInvalidInput(inputList)) {
@@ -46,13 +53,6 @@ function setEventListeners(formElement, config) {
             toggleButtonState(inputList, buttonElement, config);
     });
 });
-}
-
-//Проверка наличия невалидного поля
-function hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    });
 }
 
 //Установка слушателей всем формам

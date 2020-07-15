@@ -48,7 +48,7 @@ const initialCards = [
     }
 ];
 
-config = {
+const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__item',
     submitButtonSelector: '.popup__button-submit',
@@ -57,17 +57,26 @@ config = {
     errorClass: 'popup__item-error_active',
 }
 
-//функция принимает элемент попапа в качестве аргумента
-//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
-function togglePopup(event) { 
-    event.classList.toggle('popup_open');
-    if (event.classList.contains('popup_open')) {
-        document.addEventListener('keydown', closePopupEsc);
-    }
-    else {
-        document.removeEventListener('keydown', closePopupEsc);
-    }
+//функция открытия и закрытия модальных окон
+function openPopup(event) { 
+    event.classList.add('popup_open');
+    clearFormError(config);
 }
+
+function closePopup(event) { 
+    event.classList.remove('popup_open');
+}
+
+//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
+function setCloseListener() {
+    document.addEventListener('keydown', closePopupEsc);
+    //document.addEventListener('mousedown', closeClickingOverlay);
+}
+function removeCloseListener() {
+    document.removeEventListener('keydown', closePopupEsc);
+    //document.removeEventListener('mousedown', closeClickingOverlay);
+}
+
 
 //Удаление карточек
 function deleteCard(event) {
@@ -84,7 +93,7 @@ function editFormSubmitHandler (event) {
     event.preventDefault();  
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
-    togglePopup(editPopup);
+    closePopup(editPopup);
 }
 
 //Сборка карточки и установка слушателей
@@ -112,7 +121,7 @@ function addFormSubmitHandler (event) {
     const link = linkInput.value;
     const card = assembleCard(name, link);
     addCard(card);
-    togglePopup(addPopup);
+    closePopup(addPopup);
 }
 
 //Добавляем объекты из массива
@@ -123,48 +132,57 @@ function initialRender() {
     });
 }
 
-//Функция закрытия модалных окон до нажатию Esc
+//Функция закрытия модалных окон по нажатию Esc
 function closePopupEsc(evt) {
-    const popupOpen = document.querySelector('.popup_open');
-    if (popupOpen && evt.key === 'Escape') {
-        togglePopup(popupOpen);
+    if (evt.key === 'Escape') {
+        const popupOpen = document.querySelector('.popup_open');
+        if (popupOpen) {
+            closePopup(popupOpen);
+        }
     }
 }
 
 //Функция закрытия модальных окон кликом на оверлей
-function closeClickingOverlay(evt) {
-    if (evt.target !== evt.currentTarget) { 
-        return 
-    }
-    togglePopup(evt.target)
+function closeClickingOverlay(evt) { 
+    if (evt.target !== evt.currentTarget) {  
+        return  
+    } 
+    closePopup(evt.target) 
 }
 
-//Функция отчистки форм от ошибок при открытии и отключения активности кнопке
-const clearFormError = (config) => {
-    const formList = Array.from(document.querySelectorAll(config.formSelector));
-    formList.forEach((formElement) => {
-        const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-        inputList.forEach((inputElement)=>{
-            const buttonElement = formElement.querySelector(config.submitButtonSelector);
-            buttonElement.setAttribute('disabled', true);
-            buttonElement.classList.add(config.inactiveButtonClass);
-            hideError(formElement, inputElement, config);
-        });
-    });
-}
+editPopup.addEventListener('mousedown', closeClickingOverlay);
+addPopup.addEventListener('mousedown', closeClickingOverlay);
+
+//Функция отчистки форм от ошибок при открытии и отключение активности кнопке
+const clearFormError = (config) => { 
+    const formList = Array.from(document.querySelectorAll(config.formSelector)); 
+    formList.forEach((formElement) => { 
+        const inputList = Array.from(formElement.querySelectorAll(config.inputSelector)); 
+        inputList.forEach((inputElement)=>{ 
+            const buttonElement = formElement.querySelector(config.submitButtonSelector); 
+
+            buttonElement.setAttribute('disabled', true); 
+            buttonElement.classList.add(config.inactiveButtonClass); 
+            hideError(formElement, inputElement, config); 
+        }); 
+    }); 
+}  
+
 
 //Открываем модальное окно редактирования
 editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
-    togglePopup(editPopup);
-    clearFormError(config);
+    openPopup(editPopup);
+    clearFormError(editPopup);
+    setCloseListener(editPopup);
 });
 
 //Открываем модальное окно добавления карточки
 addButton.addEventListener('click', () => {
-    togglePopup(addPopup); 
-    clearFormError(config);
+    openPopup(addPopup); 
+    clearFormError(addPopup);
+    setCloseListener(addPopup);
     formAdd.reset();
 });
 
@@ -173,22 +191,27 @@ function openImage(event) {
     const element = event.target.closest('.card');
     imageItem.src = element.querySelector('.card__image').src;
     imageTitle.textContent = element.querySelector('.card__title').textContent;
-    togglePopup(imagePopup);
+    openPopup(imagePopup);
+    setCloseListener(imagePopup);
 }
 
 //Закрываем модальное окно добавления карточки
-closeButtonAdd.addEventListener('click', () => togglePopup(addPopup)); 
+closeButtonAdd.addEventListener('click', () => {
+    closePopup(addPopup);
+    removeCloseListener(addPopup);
+});
 
 //Закрываем модальное окно редактирования 
-closeButtonEdit.addEventListener('click', () => togglePopup(editPopup));
+closeButtonEdit.addEventListener('click', () => {
+    closePopup(editPopup);
+    removeCloseListener(editPopup);
+});
 
 //Закрываем попап просмотра фотографии
-closeImageView.addEventListener('click', () => togglePopup(imagePopup));
-
-//Закрываем попапы нажатием на оверлей
-editPopup.addEventListener('mousedown', closeClickingOverlay);
-addPopup.addEventListener('mousedown', closeClickingOverlay);
-imagePopup.addEventListener('mousedown', closeClickingOverlay);
+closeImageView.addEventListener('click', () => {
+    closePopup(imagePopup);
+    removeCloseListener(imagePopup);
+});
 
 //Прикрепляем обработчик к форме добавления карточек и форме редактирования
 formAdd.addEventListener('submit', addFormSubmitHandler);
