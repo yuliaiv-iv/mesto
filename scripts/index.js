@@ -105,16 +105,6 @@ function closePopup(event) {
     event.classList.remove('popup_open');
 }
 
-//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
-function setCloseListener(event) {
-    document.addEventListener('keydown', closePopupEsc);
-    event.addEventListener('mousedown', closeClickingOverlay);
-}
-function removeCloseListener(event) {
-    document.removeEventListener('keydown', closePopupEsc);
-    event.removeEventListener('mousedown', closeClickingOverlay);
-}
-
 //Функция закрытия модалных окон по нажатию Esc
 function closePopupEsc(evt) {
     if (evt.key === 'Escape') {
@@ -131,6 +121,16 @@ function closeClickingOverlay(evt) {
         return
     }
     closePopup(evt.target);
+}
+
+//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
+function setCloseListener(event) {
+    document.addEventListener('keydown', closePopupEsc);
+    event.addEventListener('mousedown', closeClickingOverlay);
+}
+function removeCloseListener(event) {
+    document.removeEventListener('keydown', closePopupEsc);
+    event.removeEventListener('mousedown', closeClickingOverlay);
 }
 
 //Функция отчистки форм от ошибок при открытии и отключение активности кнопке
