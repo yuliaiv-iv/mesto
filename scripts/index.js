@@ -21,6 +21,7 @@ const titleInput = document.querySelector('.popup__item_input-title');
 const linkInput = document.querySelector('.popup__item_input-link');
 
 
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -57,26 +58,6 @@ const config = {
     errorClass: 'popup__item-error_active',
 }
 
-//функция открытия и закрытия модальных окон
-function openPopup(event) { 
-    event.classList.add('popup_open');
-    clearFormError(config);
-}
-
-function closePopup(event) { 
-    event.classList.remove('popup_open');
-}
-
-//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
-function setCloseListener() {
-    document.addEventListener('keydown', closePopupEsc);
-    //document.addEventListener('mousedown', closeClickingOverlay);
-}
-function removeCloseListener() {
-    document.removeEventListener('keydown', closePopupEsc);
-    //document.removeEventListener('mousedown', closeClickingOverlay);
-}
-
 
 //Удаление карточек
 function deleteCard(event) {
@@ -87,13 +68,6 @@ function deleteCard(event) {
 //Like карточки
 function likeCard(event) {
     event.target.classList.toggle('button__like_active');
-}
-
-function editFormSubmitHandler (event) {
-    event.preventDefault();  
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = jobInput.value;
-    closePopup(editPopup);
 }
 
 //Сборка карточки и установка слушателей
@@ -114,22 +88,31 @@ function addCard(card) {
     listElements.prepend(card);
 }
 
-//Добавляем новые карточки из массива
-function addFormSubmitHandler (event) {
-    event.preventDefault();
-    const name = titleInput.value;
-    const link = linkInput.value;
-    const card = assembleCard(name, link);
-    addCard(card);
-    closePopup(addPopup);
-}
-
 //Добавляем объекты из массива
 function initialRender() {
     initialCards.forEach(item => {
         const card = assembleCard(item.name, item.link);
         addCard(card);
     });
+}
+
+//функция открытия и закрытия модальных окон
+function openPopup(event) { 
+    event.classList.add('popup_open');
+}
+
+function closePopup(event) { 
+    event.classList.remove('popup_open');
+}
+
+//Слушатель добавляется при открытии модального окна и удаляется при его закрытии
+function setCloseListener(event) {
+    document.addEventListener('keydown', closePopupEsc);
+    event.addEventListener('mousedown', closeClickingOverlay);
+}
+function removeCloseListener(event) {
+    document.removeEventListener('keydown', closePopupEsc);
+    event.removeEventListener('mousedown', closeClickingOverlay);
 }
 
 //Функция закрытия модалных окон по нажатию Esc
@@ -144,46 +127,60 @@ function closePopupEsc(evt) {
 
 //Функция закрытия модальных окон кликом на оверлей
 function closeClickingOverlay(evt) { 
-    if (evt.target !== evt.currentTarget) {  
-        return  
-    } 
-    closePopup(evt.target) 
+    if (evt.target !== evt.currentTarget) {
+        return
+    }
+    closePopup(evt.target);
 }
 
-editPopup.addEventListener('mousedown', closeClickingOverlay);
-addPopup.addEventListener('mousedown', closeClickingOverlay);
-
 //Функция отчистки форм от ошибок при открытии и отключение активности кнопке
-const clearFormError = (config) => { 
-    const formList = Array.from(document.querySelectorAll(config.formSelector)); 
-    formList.forEach((formElement) => { 
-        const inputList = Array.from(formElement.querySelectorAll(config.inputSelector)); 
-        inputList.forEach((inputElement)=>{ 
-            const buttonElement = formElement.querySelector(config.submitButtonSelector); 
+const clearFormError = (formElement, config) => {
+    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+    inputList.forEach((inputElement) => {
+        hideError(formElement, inputElement, config);
+        const buttonElement = formElement.querySelector(config.submitButtonSelector);
+        toggleButtonState(inputList, buttonElement, config);
+    });
+}
 
-            buttonElement.setAttribute('disabled', true); 
-            buttonElement.classList.add(config.inactiveButtonClass); 
-            hideError(formElement, inputElement, config); 
-        }); 
-    }); 
-}  
+//Добавляем новые карточки из массива
+function addFormSubmitHandler (event) {
+    event.preventDefault();
+    const name = titleInput.value;
+    const link = linkInput.value;
+    const card = assembleCard(name, link);
+    addCard(card);
+    closePopup(addPopup);
+}
 
+//Сохранение имя и профессии
+function editFormSubmitHandler (event) {
+    event.preventDefault();  
+    profileName.textContent = nameInput.value;
+    profileAbout.textContent = jobInput.value;
+    closePopup(editPopup);
+}
+
+const clearInputError = (formElement) => {
+    formAdd.reset();
+    clearFormError(formElement, config);
+}
 
 //Открываем модальное окно редактирования
 editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
+    clearInputError(editPopup);
     openPopup(editPopup);
-    clearFormError(editPopup);
     setCloseListener(editPopup);
 });
 
+
 //Открываем модальное окно добавления карточки
 addButton.addEventListener('click', () => {
+    clearInputError(addPopup);
     openPopup(addPopup); 
-    clearFormError(addPopup);
     setCloseListener(addPopup);
-    formAdd.reset();
 });
 
 //Открываем попап просмотра фотографии
