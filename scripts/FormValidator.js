@@ -10,7 +10,7 @@ export class FormValidator {
     }
 
 //Добавляем класс с ошибкой
-    _showError = (inputElement, errorMessage) => {
+    _showError(inputElement, errorMessage) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.add(this._inputErrorClass);
         errorElement.textContent = errorMessage;
@@ -18,7 +18,7 @@ export class FormValidator {
     }
 
 //Скрываем класс с ошибкой
-    _hideError = (inputElement) => {
+    _hideError(inputElement) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.remove(this._inputErrorClass);
         errorElement.classList.remove(this._errorClass);
@@ -26,7 +26,7 @@ export class FormValidator {
     }
 
 //Проверка валидности полей ввода
-    _checkInputValidity = (inputElement) => {
+    _checkInputValidity(inputElement) {
         if(!inputElement.validity.valid) {
             this._showError(inputElement, inputElement.validationMessage);
         }
@@ -67,7 +67,7 @@ export class FormValidator {
     }
 
 //Функция отчистки форм от ошибок при открытии и отключение активности кнопке
-    clearFormError = () => {
+    clearFormError () {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         inputList.forEach((inputElement) => {
             this._hideError(inputElement);
@@ -77,7 +77,7 @@ export class FormValidator {
     }
 
 //Установка слушателей всем формам
-    enableValidation = () => {
+    enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
