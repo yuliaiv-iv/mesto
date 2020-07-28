@@ -1,12 +1,12 @@
 export class FormValidator {
-    constructor(config, formElement) {
+    constructor(validationConfig, formElement) {
         this._formElement = formElement;
-        this._formSelector = config.formSelector;
-        this._inputSelector = config.inputSelector;
-        this._submitButtonSelector = config.submitButtonSelector
-        this._inactiveButtonClass = config.inactiveButtonClass;
-        this._inputErrorClass = config.inputErrorClass;
-        this._errorClass = config.errorClass;
+        this._formSelector = validationConfig.formSelector;
+        this._inputSelector = validationConfig.inputSelector;
+        this._submitButtonSelector = validationConfig.submitButtonSelector
+        this._inactiveButtonClass = validationConfig.inactiveButtonClass;
+        this._inputErrorClass = validationConfig.inputErrorClass;
+        this._errorClass = validationConfig.errorClass;
     }
 
 //Добавляем класс с ошибкой

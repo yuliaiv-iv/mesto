@@ -1,4 +1,5 @@
 import {initialCards} from './initialCards.js';
+import {validationConfig} from './config.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 import {openPopup, closePopup} from './utils.js';
@@ -21,19 +22,12 @@ const imagePopup = document.querySelector('.popup__image');
 const closeImageView = document.querySelector('.popup__close_image');
 const titleInput = document.querySelector('.popup__item_input-title');
 const linkInput = document.querySelector('.popup__item_input-link');
+const cardTemplateSelector = '.card-template';
 
-const config = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__button-submit',
-    inactiveButtonClass: 'popup__button-submit_disabled',
-    inputErrorClass: 'popup__item_error',
-    errorClass: 'popup__item-error_active',
-}
 
 //Создадим экземпляр для каждой формы
-const profileValidator = new FormValidator(config, formEdit);
-const cardValidator = new FormValidator(config, formAdd);
+const profileValidator = new FormValidator(validationConfig, formEdit);
+const cardValidator = new FormValidator(validationConfig, formAdd);
 
 //Добавление карточки в разметку
 const addCard = (card) => {
@@ -42,7 +36,7 @@ const addCard = (card) => {
 
 //Создадим экземпляр карточки и возвращаем наружу
 const initialRender = (item) => {
-    const card = new Card(item, '.card-template');
+    const card = new Card(item, cardTemplateSelector); 
     const cardElement = card.genetareCard();
     listElements.prepend(cardElement);
     addCard(cardElement);
@@ -72,7 +66,7 @@ const editFormSubmitHandler = (event) => {
 //Отчищение полей формы addcard и отключение активности кнопке
 const clearAddFormErrors = (formElement) => {
     formAdd.reset();
-    cardValidator.clearFormError(formElement, config);
+    cardValidator.clearFormError(formElement, validationConfig);
 }
 
 //Открываем модальное окно редактирования

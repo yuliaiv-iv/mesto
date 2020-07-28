@@ -6,15 +6,3 @@
     object-fit: fill;
     height: 282px;
 }
-
-@media screen and (max-width: 677px) {
-    .card__image {
-        height: 400px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .card__image {
-        height: 282px;
-    }
-}
