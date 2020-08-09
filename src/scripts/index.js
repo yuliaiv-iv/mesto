@@ -48,6 +48,8 @@ const cardList = new Section({
 );
 cardList.rendererItems();
 
+console.log(cardList);
+
 //Добавляем новую карточку
 const addCardPopup = new PopupWithForm({
     popupSelector: addPopup,              //const addPopup = '.popup__add';

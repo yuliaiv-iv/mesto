@@ -12,12 +12,12 @@ export class Popup {
     
     open() {
         this._element.classList.add('popup_open');
-        this.setEventListeners();
+        //this.setEventListeners();
     }
 
     close() {
         this._element.classList.remove('popup_open');
-        this.setEventListeners();
+        //this.setEventListeners();
     }
 
     _handleEscClose(evt) {
