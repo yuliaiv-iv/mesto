@@ -16,8 +16,6 @@ import {
     formEdit,
     formAdd,
     imagePopup,
-    imageView,
-    imageTitle,
     nameInput,
     jobInput,
     profileName,

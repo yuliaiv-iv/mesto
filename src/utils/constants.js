@@ -5,8 +5,6 @@ const addPopup = '.popup__add';
 const formEdit = document.querySelector('.popup__input_container-edit');
 const formAdd = document.querySelector('.popup__input_container-add');
 const imagePopup = '.popup__image';
-const imageView = '.popup__view';
-const imageTitle = '.popup__title';
 const nameInput = document.querySelector('.popup__item_input-name');
 const jobInput = document.querySelector('.popup__item_input-about');
 const profileName = document.querySelector('.profile__name');
@@ -24,8 +22,6 @@ export {
     formEdit,
     formAdd,
     imagePopup,
-    imageView,
-    imageTitle,
     nameInput,
     jobInput,
     profileName,
