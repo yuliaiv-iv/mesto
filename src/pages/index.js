@@ -31,19 +31,20 @@ import {
 //Создадим экземпляры
 const profileValidator = new FormValidator(validationConfig, formEdit);
 const cardValidator = new FormValidator(validationConfig, formAdd);
-const popupImage = new PopupWithImage(imagePopup, imageView, imageTitle);
+const popupImage = new PopupWithImage(imagePopup);
 const userProfile = new UserInfo({name: profileName, about: profileAbout});
 
-//Открываем попап картинки
-function handleCardClick(image, title) {
-    popupImage.open(image, title);
-    }
+
+//Отврываем просмотр картинок
+const handleCardClick = (data) => {
+    popupImage.open(data);
+  };
 
 //Возвращаем наружу карточки из массива
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, cardTemplateSelector);
+        const card = new Card(item, cardTemplateSelector, handleCardClick);
         const cardElement = card.genetareCard();
         cardList.addItem(cardElement);
     }
@@ -97,9 +98,10 @@ editButton.addEventListener('click', () => {
     profilePopup.open();
 });
 
-popupImage.setEventListeners();
+
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
+popupImage.setEventListeners();
 
 //Вызов функций валидации форм
 profileValidator.enableValidation();

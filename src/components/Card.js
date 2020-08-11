@@ -1,5 +1,6 @@
 export class Card {
     constructor(data, cardSelector, handleCardClick) {
+        this._data = data;
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
@@ -30,7 +31,7 @@ export class Card {
             this._handleLikeCard(event);
         });
         this._element.querySelector('.card__image').addEventListener('click', () => {
-            this._handleCardClick(this._link, this._name);
+            this._handleCardClick(this._data);
         });
     }
     
