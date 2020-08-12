@@ -1,13 +1,13 @@
 import '../pages/index.css';
 
-import {initialCards} from '../components/initialCards';
-import {validationConfig} from '../utils/config';
-import {Card} from '../components/Card.js';
-import {FormValidator} from '../components/FormValidator.js';
-import {Section} from '../components/Section.js';
-import {PopupWithForm} from '../components/PopupWithForm.js';
+import { initialCards } from '../utils/initialCards.js';
+import { validationConfig } from '../utils/config.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import {PopupWithImage} from '../components/PopupWithImage.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 import {
     editButton,
     editPopup,
@@ -30,13 +30,13 @@ import {
 const profileValidator = new FormValidator(validationConfig, formEdit);
 const cardValidator = new FormValidator(validationConfig, formAdd);
 const popupImage = new PopupWithImage(imagePopup);
-const userProfile = new UserInfo({name: profileName, about: profileAbout});
+const userProfile = new UserInfo({ name: profileName, about: profileAbout });
 
 
 //Отврываем просмотр картинок
 const handleCardClick = (data) => {
     popupImage.open(data);
-  };
+};
 
 //Возвращаем наружу карточки из массива
 const cardList = new Section({
@@ -53,23 +53,23 @@ cardList.rendererItems();
 
 //Добавляем новую карточку
 const addCardPopup = new PopupWithForm({
-    popupSelector: addPopup, 
+    popupSelector: addPopup,
     handleFormSubmit: () => {
         const name = titleInput.value;
         const link = linkInput.value;
-        const newCard = new Card({name, link}, cardTemplateSelector, handleCardClick);
-        const cardElement = newCard.genetareCard(); 
+        const alt = titleInput.value;
+        const newCard = new Card({ name, link, alt }, cardTemplateSelector, handleCardClick);
+        const cardElement = newCard.genetareCard();
         cardList.addItem(cardElement);
         addCardPopup.close();
     }
-    
 });
 
 //Открываем модальное окно добавления карточки
 addButton.addEventListener('click', () => {
     formAdd.reset();
     clearAddFormErrors(addPopup);
-    addCardPopup.open(); 
+    addCardPopup.open();
 });
 
 //Отчищение полей формы addcard и отключение активности кнопке
@@ -89,7 +89,7 @@ const profilePopup = new PopupWithForm({
 //Открываем попап профиля
 editButton.addEventListener('click', () => {
     const user = userProfile.getUserInfo();
-    nameInput.value = user.name; 
+    nameInput.value = user.name;
     jobInput.value = user.about;
     userProfile.getUserInfo();
     profileValidator.clearFormError();

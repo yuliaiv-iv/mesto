@@ -9,7 +9,7 @@ export class FormValidator {
         this._errorClass = validationConfig.errorClass;
     }
 
-//Добавляем класс с ошибкой
+    //Добавляем класс с ошибкой
     _showError(inputElement, errorMessage) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.add(this._inputErrorClass);
@@ -17,7 +17,7 @@ export class FormValidator {
         errorElement.classList.add(this._errorClass);
     }
 
-//Скрываем класс с ошибкой
+    //Скрываем класс с ошибкой
     _hideError(inputElement) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.remove(this._inputErrorClass);
@@ -25,9 +25,9 @@ export class FormValidator {
         errorElement.textContent = '';
     }
 
-//Проверка валидности полей ввода
+    //Проверка валидности полей ввода
     _checkInputValidity(inputElement) {
-        if(!inputElement.validity.valid) {
+        if (!inputElement.validity.valid) {
             this._showError(inputElement, inputElement.validationMessage);
         }
         else {
@@ -35,14 +35,14 @@ export class FormValidator {
         }
     }
 
-//Проверка наличия невалидного поля
+    //Проверка наличия невалидного поля
     _hasInvalidInput(inputList) {
         return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
         });
     }
 
-//Функция переключения кнопки
+    //Функция переключения кнопки
     _toggleButtonState(inputList, buttonElement) {
         if (this._hasInvalidInput(inputList)) {
             buttonElement.classList.add(this._inactiveButtonClass);
@@ -53,7 +53,7 @@ export class FormValidator {
         }
     }
 
-//Добавление обработчиков всем полям формы
+    //Добавление обработчиков всем полям формы
     _setEventListeners() {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
@@ -66,8 +66,8 @@ export class FormValidator {
         });
     }
 
-//Функция отчистки форм от ошибок при открытии и отключение активности кнопке
-    clearFormError () {
+    //Функция отчистки форм от ошибок при открытии и отключение активности кнопке
+    clearFormError() {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         inputList.forEach((inputElement) => {
             this._hideError(inputElement);
@@ -76,7 +76,7 @@ export class FormValidator {
         });
     }
 
-//Установка слушателей всем формам
+    //Установка слушателей всем формам
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();

@@ -11,21 +11,25 @@ module.exports = {
     module: {
         rules: [
             {
-            test: /\.js$/,
-            loader: 'babel-loader',
-            exclude: '/node_modules/'
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: '/node_modules/'
             },
             {
-            test: /\.(png|svg|jpg|gif|woff2|woff)$/,
-            loader: 'file-loader'
+                test: /\.(png|svg|jpg|gif)$/,
+                loader: 'file-loader?name=./images/[name].[ext]'
             },
             {
-            test: /\.html$/,
-            loader: 'html-loader',
+                test: /\.(eot|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=./vendor/[name].[ext]'
             },
             {
-            test: /\.css$/,
-            loader:  [MiniCssExtractPlugin.loader, 'css-loader']
+                test: /\.html$/,
+                loader: 'html-loader'
+            },
+            {
+                test: /\.css$/,
+                loader: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
     },
@@ -36,3 +40,5 @@ module.exports = {
         new MiniCssExtractPlugin()
     ]
 };
+
+

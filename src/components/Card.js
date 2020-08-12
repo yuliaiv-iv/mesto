@@ -8,10 +8,10 @@ export class Card {
     }
 
     _getTemplate() {
-        const cardElement = document 
-        .querySelector(this._cardSelector) 
-        .content 
-        .cloneNode(true);
+        const cardElement = document
+            .querySelector(this._cardSelector)
+            .content
+            .cloneNode(true);
         return cardElement;
     }
 
@@ -34,11 +34,13 @@ export class Card {
             this._handleCardClick(this._data);
         });
     }
-    
+
     genetareCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector('.card__image').src = this._link;
+        const cardImage = this._element.querySelector('.card__image');
+        cardImage.src = this._link;
+        cardImage.alt = this._name;
         this._element.querySelector('.card__title').textContent = this._name;
         return this._element;
     }
