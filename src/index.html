@@ -12,7 +12,10 @@
     <div class="container">    
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="./images/avatar.jpg" alt="Фотография профиля">
+                <dev class="profile__avatar">
+                    <img class="profile__image" src="./images/avatar.jpg" value="" alt="Фотография профиля">
+                    <button class="button profile__button-avatar profile__cover" aria-label="обновить фотографию пользователя"></button>
+                </dev>
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button type="button" aria-label="обновить информацию пользователя" class="button profile__button-edit opacity"></button>
@@ -37,7 +40,10 @@
                 <button type="button" aria-label="удалить элемент" class="button button__delete opacity"></button>
                 <div class="card__info">
                     <h3 class="card__title"></h3>
-                    <button type="button" aria-label="выразить положительную реакцию" class="button button__like opacity"></button> 
+                    <div class="card__like">
+                        <button type="button" aria-label="выразить положительную реакцию" class="button button__like opacity"></button>
+                        <span class="card__like-counter">1</span>
+                    </div>
                 </div>
             </li>
         </template>
@@ -74,6 +80,30 @@
                         <span id="link-input-error" class="popup__item-error"></span>
                     </label>
                     <button type="submit" class="button popup__button-submit">Создать</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup__avatar">
+            <div class="popup__container">
+                <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_avatar opacity"></button>
+                <h3 class="popup__title">Обновить аватар</h3>
+                <form name="avatar" class="popup__form popup__input_container-avatar" action="#" method="POST" novalidate>
+                    <label class="popup__field">
+                        <input type="url" id="link-input" class="popup__item popup__item_input-link" name="link" value="" placeholder="Ссылка на картинку" required>
+                        <span id="link-input-error" class="popup__item-error"></span>
+                    </label>
+                    <button type="submit" class="button popup__button-submit">Сохранить</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup__delete">
+            <div class="popup__container">
+                <button type="button" aria-label="закрыть модальное окно" class="button popup__close popup__close_delete opacity"></button>
+                <h3 class="popup__title">Вы уверены?</h3>
+                <form name="avatar" class="popup__form popup__input_container-delete" action="#" method="POST">
+                    <button type="submit" class="button popup__button-submit">Сохранить</button>
                 </form>
             </div>
         </section>

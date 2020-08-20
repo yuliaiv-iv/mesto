@@ -1,0 +1,11 @@
+.profile__cover {
+    background-image: url(../../../images/avatar_button.svg);
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    border: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+

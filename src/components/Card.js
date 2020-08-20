@@ -15,6 +15,16 @@ export class Card {
         return cardElement;
     }
 
+    genetareCard() {
+        this._element = this._getTemplate();
+        this._setEventListeners();
+        const cardImage = this._element.querySelector('.card__image');
+        cardImage.src = this._link;
+        cardImage.alt = this._name;
+        this._element.querySelector('.card__title').textContent = this._name;
+        return this._element;
+    }
+
     _handleDeleteCard(event) {
         event.target.closest('.card').remove();
     }
@@ -33,15 +43,5 @@ export class Card {
         this._element.querySelector('.card__image').addEventListener('click', () => {
             this._handleCardClick(this._data);
         });
-    }
-
-    genetareCard() {
-        this._element = this._getTemplate();
-        this._setEventListeners();
-        const cardImage = this._element.querySelector('.card__image');
-        cardImage.src = this._link;
-        cardImage.alt = this._name;
-        this._element.querySelector('.card__title').textContent = this._name;
-        return this._element;
     }
 }
