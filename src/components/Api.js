@@ -15,7 +15,7 @@ export class Api {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
     getUserData() {
@@ -23,31 +23,31 @@ export class Api {
             headers: this._headers,
 
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
     postNewCard(data) {
         return fetch(`${this._baseUrl}/cards`, {
-                headers: this._headers,
-                method: 'POST',
-                body: JSON.stringify({
+            headers: this._headers,
+            method: 'POST',
+            body: JSON.stringify({
                 name: data.name,
                 link: data.link
-                })
+            })
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
     setUserData(data) {
         return fetch(`${this._baseUrl}/users/me`, {
-                headers: this._headers,
-                method: 'PATCH',
-                body: JSON.stringify({
+            headers: this._headers,
+            method: 'PATCH',
+            body: JSON.stringify({
                 name: data.name,
                 about: data.about
-                })
+            })
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
     setUserAvatarData(data) {
@@ -55,10 +55,10 @@ export class Api {
             headers: this._headers,
             method: 'PATCH',
             body: JSON.stringify({
-            avatar: data.link
+                avatar: data.link
             })
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
     deleteCard(cardId) {
@@ -66,23 +66,23 @@ export class Api {
             headers: this._headers,
             method: 'DELETE'
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
-    addLike(cardId){
+    addLike(cardId) {
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'PUT',
             headers: this._headers
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 
-    deleteLike(cardId){
+    deleteLike(cardId) {
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(this._checkStatus);
+            .then(this._checkStatus);
     }
 }
 
