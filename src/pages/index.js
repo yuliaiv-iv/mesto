@@ -50,40 +50,55 @@ const userProfile = new UserInfo({ name: profileName, about: profileAbout, avata
 const deleteCardPopup = new PopupWithConfirm({ popupSelector: deleteCard });
 let userId = '';
 
-//Загружаем картинки с сервера
-api.getInitialCards()
-    .then((item) => {
-        cardList.rendererItems(item);
+Promise.all([api.getInitialCards(), api.getUserData()])
+    .then((result) => {
+        const [items, userInfo] = result;
+    cardList.rendererItems(items);
+    userProfile.setUserInfo(userInfo);
+    console.log(result[1])
+    console.log(userInfo)
+    userId = userInfo._id;
+    console.log(userId)
     })
     .catch((err) => {
         console.log(err);
     });
 
-//Закружаем данные профиля с сервера    
-api.getUserData()
-    .then((item) => {
-        userProfile.setUserInfo(item);
-        userId = item._id;
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+//Загружаем картинки с сервера
+// api.getInitialCards()
+//     .then((item) => {
+//         cardList.rendererItems(item);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
+
+// //Закружаем данные профиля с сервера    
+// api.getUserData()
+//     .then((item) => {
+//         userProfile.setUserInfo(item);
+//         userId = item._id;
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
 
 // Создаем карточку    
-function renderer(item) {
+const renderer = (item) => {
     const card = new Card(item, userId, cardTemplateSelector, addLike, deleteLike, handleDelete, handleCardClick);
     const cardElement = card.genetareCard();
     cardList.addItem(cardElement);
     //Отврываем просмотр картинок
-    const handleCardClick = (data) => {
+    function handleCardClick(data) {
         popupImage.open(data);
-    };
+    }
     //функция удаления карточки
     function handleDelete(item) {
         deleteCardPopup.setFormSubmitHandler(() => {
             api.deleteCard(item._id)
                 .then(() => {
                     card.deletePhoto();
+                    deleteCardPopup.close();
                 })
                 .catch((err) => {
                     console.log(`${err}`)
@@ -110,8 +125,9 @@ function renderer(item) {
             .catch((err) => {
                 console.log(err);
             });
-    }
-}
+
+    };
+};
 
 //Добавить карточки в разметку
 const cardList = new Section({
@@ -129,13 +145,14 @@ const addCardPopup = new PopupWithForm({
         api.postNewCard(item)
             .then((item) => {
                 renderer(item);
+                addCardPopup.close();
+                console.log('the card was uploaded')
             })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
                 renderLoading(false, submitCard);
-                addCardPopup.close();
             });
     }
 });
@@ -148,13 +165,14 @@ const profilePopup = new PopupWithForm({
         api.setUserData(item)
             .then((item) => {
                 userProfile.setUserInfo(item);
+                profilePopup.close();
+                console.log('the profile info wad updated')
             })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
                 renderLoading(false, submitInfo);
-                profilePopup.close();
             });
     }
 });
@@ -167,13 +185,13 @@ const addAvatarPopup = new PopupWithForm({
         api.setUserAvatarData(item)
             .then((item) => {
                 userProfile.setUserInfo(item);
+                addAvatarPopup.close();
             })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
                 renderLoading(false, submitAvatar);
-                addAvatarPopup.close();
             });
     }
 });

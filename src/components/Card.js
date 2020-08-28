@@ -1,5 +1,5 @@
 export class Card {
-    constructor(data, userId, cardSelector, putLike, deleteLike, handleDeleteCard, handleCardClick) {
+    constructor(data, userId, cardSelector, addLike, deleteLike, handleDeleteCard, handleCardClick) {
         this._data = data;
         this._name = data.name;
         this._link = data.link;
@@ -9,7 +9,7 @@ export class Card {
         this._userId = userId;
         this._cardSelector = cardSelector;
         this._deleteLike = deleteLike;
-        this._putLike = putLike;
+        this._addLike = addLike;
         this._handleDeleteCard = handleDeleteCard;
         this._handleCardClick = handleCardClick;
     }
@@ -28,14 +28,14 @@ export class Card {
         this._element = null;
     }
 
-    _isLiked() {
+    isLiked() {
         if (this._likes.some((like) =>
             (like._id === this._userId))) {
             this._element.querySelector('.button__like').classList.add('button__like_active');
         }
     }
 
-    _handleLike(event) {
+    handleLike() {
         if (event.target.classList.contains('button__like_active')) {
             event.target.classList.remove('button__like_active');
             this._counter.textContent = this._likes.length - 1;
@@ -43,7 +43,7 @@ export class Card {
         } else {
             event.target.classList.add('button__like_active');
             this._counter.textContent = this._likes.length += 1;
-            this._putLike(this._cardId);
+            this._addLike(this._cardId);
         }
     }
 
@@ -54,7 +54,7 @@ export class Card {
         if (this._ownerId === this._userId) {
             deleteButton.classList.add('button_visible');
         }
-        this._isLiked();
+        this.isLiked();
         this._counter = this._element.querySelector('.card__like-counter');
         this._counter.textContent = this._likes.length;
         const cardImage = this._element.querySelector('.card__image');
@@ -65,8 +65,8 @@ export class Card {
     }
 
     _setEventListeners() {
-        this._element.querySelector('.button__like').addEventListener('click', (event) => {
-            this._handleLike(event);
+        this._element.querySelector('.button__like').addEventListener('click', () => {
+            this.handleLike();
         });
         if (this._ownerId === this._userId) {
             this._element.querySelector('.button__delete').addEventListener('click', () => {
