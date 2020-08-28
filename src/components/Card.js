@@ -35,10 +35,10 @@ export class Card {
         }
     }
 
-    handleLike() {
+    _handleLike() {
         if (event.target.classList.contains('button__like_active')) {
             event.target.classList.remove('button__like_active');
-            this._counter.textContent = this._likes.length - 1;
+            this._counter.textContent = this._likes.length -= 1;
             this._deleteLike(this._cardId);
         } else {
             event.target.classList.add('button__like_active');
@@ -66,7 +66,7 @@ export class Card {
 
     _setEventListeners() {
         this._element.querySelector('.button__like').addEventListener('click', () => {
-            this.handleLike();
+            this._handleLike();
         });
         if (this._ownerId === this._userId) {
             this._element.querySelector('.button__delete').addEventListener('click', () => {

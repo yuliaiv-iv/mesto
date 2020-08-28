@@ -53,35 +53,13 @@ let userId = '';
 Promise.all([api.getInitialCards(), api.getUserData()])
     .then((result) => {
         const [items, userInfo] = result;
-    cardList.rendererItems(items);
-    userProfile.setUserInfo(userInfo);
-    console.log(result[1])
-    console.log(userInfo)
-    userId = userInfo._id;
-    console.log(userId)
+        userId = userInfo._id;
+        cardList.rendererItems(items);
+        userProfile.setUserInfo(userInfo);
     })
     .catch((err) => {
         console.log(err);
     });
-
-//Загружаем картинки с сервера
-// api.getInitialCards()
-//     .then((item) => {
-//         cardList.rendererItems(item);
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
-
-// //Закружаем данные профиля с сервера    
-// api.getUserData()
-//     .then((item) => {
-//         userProfile.setUserInfo(item);
-//         userId = item._id;
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
 
 // Создаем карточку    
 const renderer = (item) => {
@@ -125,7 +103,6 @@ const renderer = (item) => {
             .catch((err) => {
                 console.log(err);
             });
-
     };
 };
 
