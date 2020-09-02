@@ -41,7 +41,7 @@ const api = new Api({
         'Content-Type': 'application/json'
     }
 });
-//Создадим экземпляры
+//Создадим экземпляры//
 const profileValidator = new FormValidator(validationConfig, formEdit);
 const cardValidator = new FormValidator(validationConfig, formAdd);
 const avatarValidator = new FormValidator(validationConfig, formAvatar);
