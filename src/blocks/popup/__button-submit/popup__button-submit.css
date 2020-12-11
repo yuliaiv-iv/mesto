@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 475px) {
     .popup__button-submit {
         margin-top: 36px;
         min-height: 40px;

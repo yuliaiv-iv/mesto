@@ -143,7 +143,7 @@ const profilePopup = new PopupWithForm({
             .then((item) => {
                 userProfile.setUserInfo(item);
                 profilePopup.close();
-                console.log('the profile info wad updated')
+                console.log('the profile info was updated')
             })
             .catch((err) => {
                 console.log(err);
