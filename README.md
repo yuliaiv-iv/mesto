@@ -17,5 +17,5 @@
 **[Ссылка](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)** на макет в Figma
 
 <a href="https://yuliaiv-iv.github.io/mesto" target="_blank">
-  <img align="center" src="./images/mesto-readme.jpg" alt="Место" />
+  <img align="center" src="./src/images/mesto-readme.jpg" alt="Место" />
 </a>
